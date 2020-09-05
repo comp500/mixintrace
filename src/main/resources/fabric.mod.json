@@ -1,0 +1,24 @@
+{
+	"schemaVersion": 1,
+	"id": "mixintrace",
+	"version": "${version}",
+	"name": "MixinTrace",
+	"description": "Adds a list of mixins in the stack trace to crash reports",
+	"authors": [
+		"comp500"
+	],
+	"contact": {
+		"website": "https://github.com/comp500/mixintrace",
+		"repo": "https://github.com/comp500/mixintrace"
+	},
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {},
+	"mixins": [
+		"mixintrace.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.9.3+build.207",
+		"minecraft": "*"
+	}
+}
