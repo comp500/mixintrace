@@ -8,10 +8,12 @@
 		"comp500"
 	],
 	"contact": {
-		"website": "https://github.com/comp500/mixintrace",
-		"repo": "https://github.com/comp500/mixintrace"
+		"homepage": "https://modrinth.com/mod/mixintrace",
+		"sources": "https://github.com/comp500/mixintrace",
+		"issues": "https://github.com/comp500/mixintrace/issues"
 	},
 	"license": "MIT",
+	"icon": "assets/mixintrace/icon.png",
 	"environment": "*",
 	"entrypoints": {},
 	"mixins": [
