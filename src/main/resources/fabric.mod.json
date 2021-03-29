@@ -12,6 +12,7 @@
 		"repo": "https://github.com/comp500/mixintrace"
 	},
 	"license": "MIT",
+	"icon": "assets/mixintrace/icon.png",
 	"environment": "*",
 	"entrypoints": {},
 	"mixins": [
