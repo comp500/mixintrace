@@ -2,9 +2,10 @@
 	"required": true,
 	"minVersion": "0.8",
 	"package": "link.infra.mixintrace.mixin",
-	"compatibilityLevel": "JAVA_8",
+	"compatibilityLevel": "JAVA_16",
 	"mixins": [
-		"MixinCrashReport"
+		"MixinCrashReport",
+		"MixinCrashReportSection"
 	],
 	"client": [
 	],
