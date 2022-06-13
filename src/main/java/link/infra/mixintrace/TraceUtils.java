@@ -27,10 +27,21 @@ public class TraceUtils {
 					ClassInfo classInfo = ClassInfo.fromCache(className);
 					if (classInfo != null) {
 						// Workaround for bug in Mixin, where it adds to the wrong thing :(
-						Method getMixins = ClassInfo.class.getDeclaredMethod("getMixins");
-						getMixins.setAccessible(true);
-						@SuppressWarnings("unchecked")
-						Set<IMixinInfo> mixinInfoSet = (Set<IMixinInfo>) getMixins.invoke(classInfo);
+						
+						// Workaround for an "unchecked" warning; see below
+						Object mixinInfoSetObject;
+						try {
+							Method getMixins = ClassInfo.class.getDeclaredMethod("getMixins");
+							getMixins.setAccessible(true);
+							mixinInfoSetObject = getMixins.invoke(classInfo);
+						} catch (Exception e) {
+							var mixinsField = ClassInfo.class.getDeclaredField("mixins");
+							mixinsField.setAccessible(true);
+							mixinInfoSetObject = mixinsField.get(classInfo);
+						}
+						
+						@SuppressWarnings("unchecked") Set<IMixinInfo> mixinInfoSet = (Set<IMixinInfo>) mixinInfoSetObject;
+						
 						if (mixinInfoSet.size() > 0) {
 							crashReportBuilder.append("\n\t");
 							crashReportBuilder.append(className);
@@ -50,7 +61,7 @@ public class TraceUtils {
 				if (!found) {
 					crashReportBuilder.append(" None found");
 				}
-			} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+			} catch (Exception e) {
 				crashReportBuilder.append(" Failed to find Mixin metadata: ").append(e);
 			}
 		}
