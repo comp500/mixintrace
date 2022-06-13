@@ -20,7 +20,7 @@
 		"mixintrace.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.9.3+build.207",
+		"fabricloader": ">=0.12.0",
 		"minecraft": "*"
 	}
 }

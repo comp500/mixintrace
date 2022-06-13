@@ -3,7 +3,6 @@ package link.infra.mixintrace;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.mixin.transformer.ClassInfo;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +26,13 @@ public class TraceUtils {
 					ClassInfo classInfo = ClassInfo.fromCache(className);
 					if (classInfo != null) {
 						// Workaround for bug in Mixin, where it adds to the wrong thing :(
-						
-						// Workaround for an "unchecked" warning; see below
 						Object mixinInfoSetObject;
 						try {
 							Method getMixins = ClassInfo.class.getDeclaredMethod("getMixins");
 							getMixins.setAccessible(true);
 							mixinInfoSetObject = getMixins.invoke(classInfo);
 						} catch (Exception e) {
+							// Fabric loader >=0.12.0 proguards out this method; use the field instead
 							var mixinsField = ClassInfo.class.getDeclaredField("mixins");
 							mixinsField.setAccessible(true);
 							mixinInfoSetObject = mixinsField.get(classInfo);
